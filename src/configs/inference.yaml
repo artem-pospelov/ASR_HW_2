@@ -1,0 +1,15 @@
+defaults:
+  - model: deepspeech2
+  - metrics: example
+  - datasets: example_eval # we do not want to run inference on training data
+  - dataloader: example
+  - transforms: example
+  - _self_
+text_encoder:
+  _target_: src.text_encoder.CTCTextEncoder
+  bpe_path: lm/tokenizer.json
+  lm_path: lm/4gram.arpa
+  lm_vocab_path: lm/librispeech-vocab.txt
+
+inferencer:
+  device_tensors: ["spectrogram", "text_encoded"] # which tensors shoul
